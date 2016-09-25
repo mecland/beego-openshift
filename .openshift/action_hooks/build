@@ -1,9 +1,9 @@
 #!/bin/bash
 set -eo pipefail
 
-version=${GOVERSION:-1.1.2}
+version=${GOVERSION:-1.6.2}
 srcfile=${GOFILE:-go$version.$(uname|tr A-Z a-z)-amd64.tar.gz}
-url=${GOURL:-http://go.googlecode.com/files/$srcfile}
+url=${GOURL:http://www.golangtc.com/static/go/$version/$srcfile}
 dist=${GODIST:-$OPENSHIFT_DIY_DIR/cache/go-$version}
 
 if [ -d $dist/go ]; then
@@ -12,6 +12,7 @@ else
 	mkdir -p $dist
 	cd $dist
 	echo "Installing Go $version"
+	echo "Filename $url"
 	echo "Download..."
 	curl -sO $url
 	echo "Unzip..."
